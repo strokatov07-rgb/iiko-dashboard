@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Выручка онлайн — Чикен Республик</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=Mulish:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --card: #16161a;
+    --border: #222228;
+    --accent: #ff5c35;
+    --green: #3dd68c;
+    --yellow: #ffb830;
+    --blue: #5b8fff;
+    --text: #f0ede8;
+    --muted: #5a5768;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Mulish', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 28px;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+
+  .brand {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .brand span { color: var(--accent); }
+
+  .live-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(61,214,140,0.08);
+    border: 1px solid rgba(61,214,140,0.2);
+    border-radius: 20px;
+    padding: 6px 14px;
+  }
+
+  .live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: blink 1.5s infinite;
+  }
+
+  @keyframes blink {
+    0%,100% { opacity:1; } 50% { opacity:0.2; }
+  }
+
+  /* TOTAL */
+  .total-card {
+    background: linear-gradient(135deg, #1a1016, #16161a);
+    border: 1px solid rgba(255,92,53,0.25);
+    border-radius: 20px;
+    padding: 28px 36px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .total-card::before {
+    content:'';
+    position:absolute;
+    top:-80px; right:-80px;
+    width:220px; height:220px;
+    border-radius:50%;
+    background: radial-gradient(circle, rgba(255,92,53,0.1), transparent 70%);
+  }
+
+  .total-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .total-value {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .total-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .total-right { text-align: right; }
+
+  .total-orders {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .total-orders-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .loc-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 26px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+
+  .loc-card:hover { transform: translateY(-2px); }
+
+  .loc-card::before {
+    content:'';
+    position:absolute;
+    top:0; left:0; right:0;
+    height:3px;
+  }
+
+  .loc-card:nth-child(1)::before { background: var(--accent); }
+  .loc-card:nth-child(2)::before { background: var(--yellow); }
+  .loc-card:nth-child(3)::before { background: var(--green); }
+  .loc-card:nth-child(4)::before { background: var(--blue); }
+
+  .loc-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--muted);
+  }
+
+  .loc-revenue {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .loc-card:nth-child(1) .loc-revenue { color: var(--accent); }
+  .loc-card:nth-child(2) .loc-revenue { color: var(--yellow); }
+  .loc-card:nth-child(3) .loc-revenue { color: var(--green); }
+  .loc-card:nth-child(4) .loc-revenue { color: var(--blue); }
+
+  .loc-orders {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .loc-orders span {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* SHARE BAR */
+  .share-bar {
+    margin-top: 14px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .share-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 1s ease;
+  }
+
+  .loc-card:nth-child(1) .share-fill { background: var(--accent); }
+  .loc-card:nth-child(2) .share-fill { background: var(--yellow); }
+  .loc-card:nth-child(3) .share-fill { background: var(--green); }
+  .loc-card:nth-child(4) .share-fill { background: var(--blue); }
+
+  .share-label {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 5px;
+    text-align: right;
+  }
+
+  .update-info {
+    text-align: center;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  /* BUMP animation on update */
+  @keyframes bump {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+  }
+
+  .bumping { animation: bump 0.4s ease; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><span>Чикен</span> Республик</div>
+  <div class="live-badge"><div class="live-dot"></div> Live</div>
+</header>
+
+<div class="total-card">
+  <div>
+    <div class="total-label">Общая выручка за сегодня</div>
+    <div class="total-value" id="totalRevenue">₸ 0</div>
+    <div class="total-meta" id="totalMeta">Ожидание данных...</div>
+  </div>
+  <div class="total-right">
+    <div class="total-orders" id="totalOrders">0</div>
+    <div class="total-orders-label">заказов</div>
+  </div>
+</div>
+
+<div class="grid" id="locGrid">
+  <!-- карточки генерируются JS -->
+</div>
+
+<div class="update-info" id="updateInfo">Обновляется каждые 10 секунд</div>
+
+<script>
+  const ORGS = ["Панфилова", "Орбита", "Форум", "Атакент"];
+
+  // Создаём карточки
+  const grid = document.getElementById('locGrid');
+  ORGS.forEach(name => {
+    grid.innerHTML += `
+      <div class="loc-card" id="card-${name}">
+        <div class="loc-name">${name}</div>
+        <div class="loc-revenue" id="rev-${name}">₸ 0</div>
+        <div class="loc-orders">Заказов: <span id="ord-${name}">0</span></div>
+        <div class="share-bar"><div class="share-fill" id="bar-${name}" style="width:0%"></div></div>
+        <div class="share-label" id="pct-${name}">0%</div>
+      </div>`;
+  });
+
+  function fmt(n) {
+    return '₸ ' + Math.round(n).toLocaleString('ru-RU');
+  }
+
+  async function refresh() {
+    try {
+      const res = await fetch('/api/stats');
+      const data = await res.json();
+
+      const orgs = data.orgs;
+      const totalRev = Object.values(orgs).reduce((s, o) => s + o.revenue, 0);
+      const totalOrd = Object.values(orgs).reduce((s, o) => s + o.orders, 0);
+
+      // Обновляем итого
+      document.getElementById('totalRevenue').textContent = fmt(totalRev);
+      document.getElementById('totalOrders').textContent = totalOrd;
+      document.getElementById('totalMeta').textContent =
+        totalOrd > 0 ? `Средний чек: ${fmt(totalRev / totalOrd)}` : 'Ожидание заказов...';
+
+      // Обновляем карточки
+      ORGS.forEach(name => {
+        const o = orgs[name] || { revenue: 0, orders: 0 };
+        const pct = totalRev > 0 ? Math.round(o.revenue / totalRev * 100) : 0;
+
+        document.getElementById(`rev-${name}`).textContent = fmt(o.revenue);
+        document.getElementById(`ord-${name}`).textContent = o.orders;
+        document.getElementById(`bar-${name}`).style.width = pct + '%';
+        document.getElementById(`pct-${name}`).textContent = pct + '%';
+      });
+
+      // Время обновления
+      if (data.lastUpdate) {
+        const t = new Date(data.lastUpdate).toLocaleTimeString('ru-RU');
+        document.getElementById('updateInfo').textContent = `Последнее обновление: ${t}`;
+      }
+
+    } catch(e) {
+      document.getElementById('updateInfo').textContent = '⚠️ Нет связи с сервером';
+    }
+  }
+
+  refresh();
+  setInterval(refresh, 10000); // каждые 10 сек
+</script>
+</body>
+</html>

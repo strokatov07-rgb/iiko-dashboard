@@ -1,0 +1,12 @@
+{
+  "name": "iiko-dashboard",
+  "version": "1.0.0",
+  "description": "iiko live revenue dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
